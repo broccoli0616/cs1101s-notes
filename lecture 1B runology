@@ -1,0 +1,50 @@
+// Type your program in here
+import { rcross, sail, corner, 
+nova, heart, show, quarter_turn_right, stack, green, stackn, pink,
+    turn_upside_down, repeat_pattern} from 'rune';
+// imported functions are considered as primitives 
+// functional declaration 
+function quarter_upside_down(rune) {
+    // rune is the argument/ parameter here still need to good 
+    // about choosing names 
+    return quarter_turn_right(quarter_turn_right(rune));
+}
+
+function quarter_turn_left(rune){
+    return quarter_turn_right(quarter_upside_down(rune));
+}
+
+show(quarter_turn_left(sail));
+// show much like a display function 
+
+show(stack(rcross,sail));
+// stack: put on rune on top of the other 
+
+show(green(heart));// function green to colour the rune 
+
+// show two hearts, this a binary function where function has 
+//two parameters 
+function beside(rune1, rune2) {
+return quarter_turn_left(stack(quarter_turn_right(rune1), quarter_turn_right(rune2)));
+}
+show(beside(green(heart), pink(heart)));
+ 
+function quilt(n, m, rune) {
+    return stackn(n, quarter_turn_right(stackn(m, quarter_turn_left(pink(heart)))));
+}
+
+show(quilt(12,12,pink(heart)));
+show(rcross);
+function make_cross(rune) {
+    return stack(beside(quarter_turn_right(rune), turn_upside_down(rune)), 
+beside(rune,quarter_turn_left(rune)));
+}
+ show(repeat_pattern(6, make_cross, rcross));
+
+
+
+
+
+
+
+
