@@ -41,8 +41,7 @@ beside(rune,quarter_turn_left(rune)));
 }
  show(repeat_pattern(6, make_cross, rcross));
 
-
-
+// repeat function ( number of times, function, argument)
 
 
 
