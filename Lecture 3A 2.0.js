@@ -64,22 +64,101 @@ the other posibility is we do not use that coin, the amount is not changed
 just straight away remove the largest coin 
 and when the function keep being recalled, 
 the amount decrease and the kindsof coin also decrease, it is just 
-either use the currenly highest denomination  or not 
+either use the currenly highest denomination  or not */
+
+
+/* higher order function 
+- takes in function as argument or returns a function 
+what 1101 does is generalize
+
+function sum (a , b) {
+return a > b ? 0
+: ⟨compute value with a⟩
++
+sum (⟨next value from a⟩, b);
+} */
+
+function sum (term, a, next, b) {
+return a > b ? 0
+: term (a)
++
+sum (term, next(a), next, b); 
+} 
+// next and term are functions 
+
+function identity (x) {
+return x ;
+}
+function plus_one (x) {
+return x + 1;
+}
+function sum_integers (a , b ) {
+return sum ( identity , a , plus_one , b );
+}
+
+// alternatively, declare function name inside the block 
+
+function sum_integers (a , b ) {
+    function identity (x) {
+        return x ;
+    }
+    function plus_one (x) {
+        return x + 1;
+    }
+    return sum (identity, a, plus_one, b);
+}
+
+
+/*lamada expression 
+(param1, param2) => body
+ if it is single parameter, you don't need (), if it is multiple need the 
+ paratesis 
+ x => x * x * x; */
+ 
+ 
+function sum (term, a, next, b) {
+return a > b ? 0
+: term (a)
++
+sum (term, next(a), next, b); 
+} 
+
+function sum_skip_cubes(a,b){
+    return sum(x => x * x * x, a, x => x + 2, b);
+}
+
+/* if the lambda expression is not an argument, need the 
+constant declaration */
+const add_one = x => x + 1;
+add(4);
+/* you don't even need to give a name, just */
+(x => x + 1)(2); 
+
+
+/*returning functions from functios */
 
 
 
+function make_adder (x) {
+    function add(y) {
+        return x + y;
+    }
+    return add;
+}
+/* it will eventually return the function add, and we can give the function
+a name called adder_four when x = 4
+function make_adder actually return a function add, and assign 
+the add a name adder_four and give the parameter (6) */
+const adder_four = make_adder (4);
+adder_four (6);
 
 
-
-
-
-
-
-
-
-
-
-
+// simpler form 
+function make_adder(x){
+    return y => y + x;
+}
+const add_four = make_adder(4);
+add_four(3)
 
 
 
