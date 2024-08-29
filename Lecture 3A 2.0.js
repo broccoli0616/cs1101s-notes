@@ -184,6 +184,24 @@ Scoping rule
 A name occurrence refers to the closest surrounding declaration.
 */
 
+//path:
+function accumulate(combiner, term, a, next, b, base) {
+    // YOUR SOLUTION HERE
+    function identity(a){
+        return a;
+    }
+    function plus_1(a){
+        return a + 1;
+    }
+    return a < base
+    ? 0
+    : a > b
+    ? base 
+    /*there is a trick here, if its product return 1
+    while addition return 0*/
+    : combiner(a, accumulate(combiner, identity, plus_1(a), plus_1, b, base));
+}
+
 
 
 
