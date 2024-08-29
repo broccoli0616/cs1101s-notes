@@ -162,6 +162,27 @@ add_four(3)
 
 
 
+/*scope of name */
+
+const z = 2;
+function f (g) {
+const z = 4;
+return g (z);
+}
+f (y = > y + z); // the y here is actually a parameter 
+
+/*
+Declarations mandatory
+All names in Source must be declared.
+Forms of declaration
+1 Pre-declared names
+2 Constant declarations
+(only accesible inside the block)
+3 Parameters of function declarations and lambda expressions
+4 Function name of function declarations
+Scoping rule
+A name occurrence refers to the closest surrounding declaration.
+*/
 
 
 
