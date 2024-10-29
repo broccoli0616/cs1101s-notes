@@ -46,3 +46,47 @@ function invest(n){
 
 invest(50);
 
+4) diagonational for infinity stream 
+function stream_pair3(s){
+    function streamMaker(a, b){
+        return b === a? null : pair(pair(a, b), () => streamMaker(a + 1, b));
+    } // append will remove the null here 
+    return stream_append_pickle(streamMaker(1, head(s)), () => stream_pair3(stream_tail(s)));
+}
+
+
+5)make_coinchange memorization version 
+const mem = [];
+function read(n, k){
+    if(mem[n][k] === undefined){
+        return undefined; 
+    }else{
+        return mem[n][k];
+    }
+}
+    
+function write(n, k, value){
+    if(mem[n] === undefined){
+        mem[n] = [];
+    }
+    mem[n][k] = value;
+}
+
+function mcc(n, k) { // n is amount, k is coins
+    if (n >= 0 && k >= 0 && read(n, k) !== undefined) {
+	return read(n, k);
+    } else {
+const result = n === 0
+    	    ? 1
+    	    : n < 0 || k === 0
+    	    ? 0
+    	     : mcc(n, k - 1) + mcc(n - first_denomination(k), k);
+	if (n >= 0 && k >= 0) {
+  	    write(n, k, result);
+	}
+	return result;
+    }
+}
+
+
+
