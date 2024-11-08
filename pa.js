@@ -355,58 +355,121 @@
 
 
 
-// array merge_sort 
-function merge_sort(A){
-   function merge(A, s, m, e){
-      const tmp = [];
-      let left = s; let right = m + 1;
-      let index = 0;
-      while (left <= m && right <= e){
-             if(A[left] <= A[right]){
-                tmp[index] = A[left];
-                left = left + 1;
-             }else{
-                tmp[index] = A[right];
-                right = right + 1;
-             }
-                index = index + 1;
-           }
-      while (left <= m) { 
-             tmp[index] = A[left];
-             index = index + 1;
-             left = left + 1;
-           }
-      while(right <= e){ 
-             tmp[index] = A[right];
-             index = index + 1;
-             right = right + 1;
-        }
-       for (let i = 0; i < array_length(tmp); i = i + 1) {
-       A[s + i] = tmp[i];
-       }
+// // array_merge_sort 
+// function merge_sort(A){
+//   function merge(A, s, m, e){
+//       const tmp = [];
+//       let left = s; let right = m + 1;
+//       let index = 0;
+//       while (left <= m && right <= e){
+//              if(A[left] <= A[right]){
+//                 tmp[index] = A[left];
+//                 left = left + 1;
+//              }else{
+//                 tmp[index] = A[right];
+//                 right = right + 1;
+//              }
+//                 index = index + 1;
+//           }
+//       while (left <= m) { 
+//              tmp[index] = A[left];
+//              index = index + 1;
+//              left = left + 1;
+//           }
+//       while(right <= e){ 
+//              tmp[index] = A[right];
+//              index = index + 1;
+//              right = right + 1;
+//         }
+//       for (let i = 0; i < array_length(tmp); i = i + 1) {
+//       A[s + i] = tmp[i];
+//       }
+//     }
+//     function iter_ms(A, s, e) {
+//         if (s < e) { 
+//           const m = math_floor((s + e) / 2);
+//           iter_ms(A, s, m); 
+//           iter_ms(A, m + 1, e);
+//          merge(A, s, m, e); 
+//     }
+//  }
+//  return iter_ms(A, 0, array_length(A) - 1);
+// }
+ 
+// //// bubble sort
+// function bblSort(arr) {
+//     for (var i = 0; i < arr.length; i++) {
+//         for (var j = 0; j < (arr.length - i - 1); j++) {
+//                 var temp = arr[j]
+//                 arr[j] = arr[j + 1]
+//                 arr[j + 1] = temp
+//             }
+//         }
+//     }
+//     console.log(arr);
+// }
+// // array_selection_sort
+// function selection_sort(A) {
+//  const len = array_length(A);
+//  function swap(A, i, j) {
+//  const tmp = A[i];
+//  A[i] = A[j]; A[j] = tmp;
+//  }
+//  function find_min(i) {
+//  let p = i;
+//  for (let j = i; j < len; j = j + 1) {
+//  if (A[j] < A[p]) { p = j; }
+//  }
+//  return p;
+//  }
+//  for (let i = 0; i < len; i = i + 1) {
+//  const j = find_min(i);
+//  swap(A, i, j);
+//  }
+// }
+
+// // array_insertion_sort
+// function insertion_sort(A) {
+//  const len = array_length(A);
+//  function swap(A, i, j) {
+//  const tmp = A[i];
+//  A[i] = A[j]; A[j] = tmp;
+//  }
+//  for (let i = 1; i < len; i = i + 1) {
+//  let j = i - 1;
+//  while (j >= 0 && A[j] > A[j + 1]) {
+//  swap(A, j, j + 1);
+//  j = j - 1;
+//  }
+//  }
+// }
+
+
+function value_to_baseN(N, x) {
+
+    const DIGIT_SYMBOLS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+                           "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+                           "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
+                           "U", "V", "W", "X", "Y", "Z"];
+   function helper(N,x){
+    function digi(num){
+        return DIGIT_SYMBOLS[num];
     }
-    function iter_ms(A, s, e) {
-        if (s < e) { 
-          const m = math_floor((s + e) / 2);
-          iter_ms(A, s, m); 
-          iter_ms(A, m + 1, e);
-         merge(A, s, m, e); 
+    
+    const num = x % N;
+    if(N > x){
+        return null;
+    }else {
+        const result = append(value_to_baseN(N, math_floor(x / N)), list(digi(num)));
+        display(result);
+        return tail(result);
+        
     }
- }
- return iter_ms(A, 0, array_length(A) - 1);
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
+return pair(N, helper(N,x));
+}
+value_to_baseN(16, 584255);
 
 
 
