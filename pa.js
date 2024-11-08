@@ -120,71 +120,95 @@
 
 // // You may write helper functions here.
 
-function take(L, mid) {
-    return mid === 0 
-           ? null 
-           : pair(head(L), take(tail(L), mid - 1));
-}
+// function take(L, mid) {
+//     return mid === 0 
+//           ? null 
+//           : pair(head(L), take(tail(L), mid - 1));
+// }
 
-function drop(L, mid) {
-    return mid === 0 
-           ? L 
-           : drop(tail(L), mid - 1);
-}
+// function drop(L, mid) {
+//     return mid === 0 
+//           ? L 
+//           : drop(tail(L), mid - 1);
+// }
 
-function middle(len) {
-    if(len % 2 === 0) {
-        return len / 2;
-    } else {
-        return math_floor(len / 2);
-    }
-}
+// function middle(len) {
+//     if(len % 2 === 0) {
+//         return len / 2;
+//     } else {
+//         return math_floor(len / 2);
+//     }
+// }
 
-function merge(xs, ys) {
-    if(is_null(xs)) {
-        return ys;
-    } else if (is_null(ys)) {
-        return xs;
-    } else {
-        return head(xs) < head(ys) 
-               ? pair(head(xs), merge(tail(xs), ys)) 
-               : pair(head(ys), merge(xs, tail(ys)));
-    }
-}
+// function merge(xs, ys) {
+//     if(is_null(xs)) {
+//         return ys;
+//     } else if (is_null(ys)) {
+//         return xs;
+//     } else {
+//         return head(xs) < head(ys) 
+//               ? pair(head(xs), merge(tail(xs), ys)) 
+//               : pair(head(ys), merge(xs, tail(ys)));
+//     }
+// }
 
-function merge_sort(L) {
-    if(is_null(L) || is_null(tail(L))) {
-        return L;
-    } else {
-        const mid = middle(length(L));
-        return merge(merge_sort(take(L, mid)), 
-                     merge_sort(drop(L, mid)));
-    }
-}
+// function merge_sort(L) {
+//     if(is_null(L) || is_null(tail(L))) {
+//         return L;
+//     } else {
+//         const mid = middle(length(L));
+//         return merge(merge_sort(take(L, mid)), 
+//                      merge_sort(drop(L, mid)));
+//     }
+// }
 
-function take_entry(L) {
-    const len = length(L);
-    if(len % 2 === 0) {
-        return list_ref(L, len / 2);
-    } else {
-        return list_ref(L, math_floor(len / 2));
-    }
-}
+// function take_entry(L) {
+//     const len = length(L);
+//     if(len % 2 === 0) {
+//         return list_ref(L, len / 2);
+//     } else {
+//         return list_ref(L, math_floor(len / 2));
+//     }
+// }
 
-function make_balanced_BST(L) {
-    const SL = merge_sort(L);
-    const mid = middle(length(SL));
-    if(is_null(SL)) {
-        return SL;
-    } else if(is_null(tail(SL))) {
-        return list(head(SL), null, null);
-    } else {
-        return list(take_entry(SL), 
-                    make_balanced_BST(take(SL, mid)), 
-                    make_balanced_BST(drop(SL, mid + 1)));
-    }
-}
-make_balanced_BST( list(4, 6, 1, 3, 7, 5) );
-// returns list(5, list(3, list(1, null, null), list(4, null, null)),
-//                 list(7, list(6, null, null), null))
+ 
+// function make_balanced_BST(L) {
+//     const SL = merge_sort(L);
+//     const mid = middle(length(SL));
+//     if(is_null(SL)) {
+//         return SL;
+//     } else if(is_null(tail(SL))) {
+//         return list(head(SL), null, null);
+//     } else {
+//         return list(take_entry(SL), 
+//                     make_balanced_BST(take(SL, mid)), 
+//                     make_balanced_BST(drop(SL, mid + 1)));
+//     }
+// }
+// make_balanced_BST( list(4, 6, 1, 3, 7, 5) );
+// // returns list(5, list(3, list(1, null, null), list(4, null, null)),
+// //                 list(7, list(6, null, null), null))
+
+// const tree = list(5, list(3, list(1, null, null), list(4, null, null)),
+//               list(7, list(6, null, null), null));
+
+// function flatten_tree(xs){
+//     return accumulate((x, y) => append(is_list(x)
+//                                       ? flatten_tree(x)
+//                                       : list(x), y), null, xs);
+// }
+
+// flatten_tree(tree);
+
+// function zip(xss, f){
+//     const x = length(head(xss));
+//     return map(x => map(y => f(list_ref(y, x)), xss), enum_list(0, x - 1));
+// }
+
+// zip(list(list(1, 2, 3), list(4, 5, 6), list(6, 7, 9)), x => x + 1);
+
+
+
+
+
 
