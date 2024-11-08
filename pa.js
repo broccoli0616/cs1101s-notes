@@ -318,7 +318,99 @@
 // // const my_list = list(23, 12, 56, 92, -2, 0);
 // // quicksort(my_list);
 
-////
+//// insertion sort 
+// function insert(x, xs) {
+//     return is_null(xs)
+//           ? list(x)
+//           : x <= head(xs)
+//           ? pair(x, xs)
+//           : pair(head(xs), insert(x, tail(xs)));
+// }
+
+// function insertion_sort(xs) {
+//     return is_null(xs)
+//           ? xs
+//           : insert(head(xs), insertion_sort(tail(xs)));
+// }
+
+// //// selection sort 
+// function selection_sort(xs) { 
+//     if (is_null(xs)) { 
+//         return xs; 
+//     }else{const x = smallest(xs); 
+//           return pair(x, selection_sort(remove(x, xs))); 
+//     } 
+// } 
+// function smallest(xs) { 
+// function sm(x, ys){ 
+// return is_null(ys) 
+//       ? x 
+//       : x < head(ys)
+//       ? sm(x, tail(ys)) 
+//       : sm(head(ys), tail(ys));
+// }  
+//       return sm(head(xs), tail(xs)); 
+    
+// } 
+
+
+
+// array merge_sort 
+function merge_sort(A){
+   function merge(A, s, m, e){
+      const tmp = [];
+      let left = s; let right = m + 1;
+      let index = 0;
+      while (left <= m && right <= e){
+             if(A[left] <= A[right]){
+                tmp[index] = A[left];
+                left = left + 1;
+             }else{
+                tmp[index] = A[right];
+                right = right + 1;
+             }
+                index = index + 1;
+           }
+      while (left <= m) { 
+             tmp[index] = A[left];
+             index = index + 1;
+             left = left + 1;
+           }
+      while(right <= e){ 
+             tmp[index] = A[right];
+             index = index + 1;
+             right = right + 1;
+        }
+       for (let i = 0; i < array_length(tmp); i = i + 1) {
+       A[s + i] = tmp[i];
+       }
+    }
+    function iter_ms(A, s, e) {
+        if (s < e) { 
+          const m = math_floor((s + e) / 2);
+          iter_ms(A, s, m); 
+          iter_ms(A, m + 1, e);
+         merge(A, s, m, e); 
+    }
+ }
+ return iter_ms(A, 0, array_length(A) - 1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
