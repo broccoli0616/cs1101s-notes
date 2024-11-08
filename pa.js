@@ -506,5 +506,52 @@ function bin_tree_to_BST(T) {
 
 
 
+function num_unique(A) {
+let count = 0;
+let len = array_length(A);
+let appear = true;
+    if(A[0] === undefined){
+        return 0;
+    } else{
+        for(let i = 0; i < len; i = i + 1){
+            // if(appear){
+            //     count = count + 1;
+            // }
+            for(let j = i + 1; j < len; j = j + 1){
+                if(A[i] === A[j]){
+                    count = count + 1; 
+                    break;
+                }
+            }
+        }
+    }
+    return len - count;
 
+}
+
+
+
+function value_to_baseN(N, x) {
+
+    const DIGIT_SYMBOLS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+                           "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+                           "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
+                           "U", "V", "W", "X", "Y", "Z"];
+   function helper(N,x){
+    function digi(num){
+        return DIGIT_SYMBOLS[num];
+    }
+    
+    const num = x % N;
+    if(N > x){
+        return list(digi(num));
+    }else {
+       return append(helper(N, math_floor(x / N)), list(digi(num)));
+ 
+        
+    }
+
+}
+return pair(N, helper(N,x));
+}
 
