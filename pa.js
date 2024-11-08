@@ -209,6 +209,116 @@
 
 
 
+// function tree_to_array(xs){
+//     const A = [];
+//     for(let i = 0; i < length(xs); i = i + 1){
+//         A[i] = is_list(list_ref(xs, i))
+//               ? tree_to_array(list_ref(xs, i))
+//               : list_ref(xs, i);
+//     } return A;
+// }
+
+// tree_to_array(list(list(1, 2, 3), list(2, 3, 5), list(4, 5)));
+
+// function array_to_tree(A){
+//     let xs = null;
+//     for(let i = 0; i < array_length(A); i = i + 1){
+//         xs = pair(is_array(A[i])
+//                   ? array_to_tree(A[i])
+//                   :(A[i]), xs);
+//     } return reverse(xs);
+// }
+
+// array_to_tree([[1, 2, 3], [2, 3, 5], [4, 5]]);
+
+
+
+
+//// merge sort 
+// function take(L, mid) {
+//     return mid === 0 
+//           ? null 
+//           : pair(head(L), take(tail(L), mid - 1));
+// }
+
+// function drop(L, mid) {
+//     return mid === 0 
+//           ? L 
+//           : drop(tail(L), mid - 1);
+// }
+
+// function middle(len) {
+//     if(len % 2 === 0) {
+//         return len / 2;
+//     } else {
+//         return math_floor(len / 2);
+//     }
+// }
+
+// function merge(xs, ys) {
+//     if(is_null(xs)) {
+//         return ys;
+//     } else if (is_null(ys)) {
+//         return xs;
+//     } else {
+//         return head(xs) < head(ys) 
+//               ? pair(head(xs), merge(tail(xs), ys)) 
+//               : pair(head(ys), merge(xs, tail(ys)));
+//     }
+// }
+
+// function merge_sort(L) {
+//     if(is_null(L) || is_null(tail(L))) {
+//         return L;
+//     } else {
+//         const mid = middle(length(L));
+//         return merge(merge_sort(take(L, mid)), 
+//                      merge_sort(drop(L, mid)));
+//     }
+// }
+
+//// quick short 
+// function partition(xs, p) {
+//     function part(ys, lower, upper) {
+//         if (is_null(ys)) {
+//             return pair(lower, upper);
+//         } else {
+//             const y = head(ys);
+
+//             if (y <= p) {
+//                 return part(tail(ys), pair(y, lower), upper);
+//             } else {
+//                 return part(tail(ys), lower, pair(y, upper));
+//             }
+//         }
+//     }
+
+//     return part(xs, null, null);
+// }
+
+// function quicksort(xs) {
+//     if (is_null(xs)) {
+//         return null;
+//     } else {
+//         const xss = tail(xs);
+
+//         if (is_null(xss)) {
+//             return xs;
+//         } else {
+//             const x = head(xs);
+//             const p = partition(xss, x);
+
+//             return append(quicksort(head(p)),
+//                           pair(x, quicksort(tail(p))));
+//         }
+//     }
+// }
+
+// // Test
+// // const my_list = list(23, 12, 56, 92, -2, 0);
+// // quicksort(my_list);
+
+////
 
 
 
