@@ -555,29 +555,116 @@
 // return pair(N, helper(N,x));
 // }
 
-function string_list(s){
-    function helper(n, s){
-        return char_at(s, n) === undefined
-               ? null 
-               :pair(char_at(s, n), helper(n + 1, s));
+// function string_list(s){
+//     function helper(n, s){
+//         return char_at(s, n) === undefined
+//               ? null 
+//               :pair(char_at(s, n), helper(n + 1, s));
+//     }
+//     return helper(0, s);
+// }
+
+// string_list("idoknowhowtodo");
+
+// // instead of using accumulate,convert list to array and update the max/ min value
+// // the element of the array is still the list 
+// let top_most = - Infinity;
+// for(let i = 0; i < array_length(ra); i = i + 1 ){
+//     const rect = ra[i];
+//     const top = get_y(rect);...... // abstract data 
+    
+//     top_most = math_max(top, top_most) // keep updating the largest data
+    
+// }
+//d_filter 
+function d_filter(pred, xs) {
+    if (is_null(xs)) {
+        return xs;
+    } else if (pred(head(xs))) {
+        set_tail(xs, d_filter(pred, tail(xs)));
+        return xs;
+    } else {
+        return d_filter(pred, tail(xs));
     }
-    return helper(0, s);
 }
 
-string_list("idoknowhowtodo");
-
-// instead of using accumulate,convert list to array and update the max/ min value
-// the element of the array is still the list 
-let top_most = - Infinity;
-for(let i = 0; i < array_length(ra); i = i + 1 ){
-    const rect = ra[i];
-    const top = get_y(rect);...... // abstract data 
-    
-    top_most = math_max(top, top_most) // keep updating the largest data
-    
+// make_withdraw
+function make_withdraw(balance, my_pw){
+    let fails = 0;
+    function withdraw(amount, guess){
+        if(fails >= 3){
+            return "account locked"
+        }
+        if(guess !== my_pw){
+            fails = fial + 1;
+            return "wrong passwords"
+        } else{
+            fails = 0;
+        }
+        if(balance >= amount){
+            balance = balance - amount;
+            return balance;
+        }else {
+            return "insufficient funds"
+        }
+    }
+    return withdraw;
 }
 
 
+
+
+// TASK 3C 
+function insert(x, xs) {
+    return is_null(xs)
+           ? list(x)
+           : x <= head(xs)
+           ? pair(x, xs)
+           : pair(head(xs), insert(x, tail(xs)));
+}
+
+function insertion_sort(xs) {
+    return is_null(xs)
+           ? xs
+           : insert(head(xs), insertion_sort(tail(xs)));
+}
+
+function bin_tree_to_BST(T) {
+    const flat = flatten_bin_tree(T);
+    const flat_sorted = insertion_sort(flat);
+    return map_tree(x => replace_elem(x, flat, flat_sorted), T);
+} // here is the bijection 
+
+function replace_elem(elem, xs, ys) {
+    while (!is_null(xs)) {
+        if (head(xs) === elem) {
+            return head(ys);
+        }
+        xs = tail(xs); // pop first elem
+        ys = tail(ys); // pop first elem
+    }
+    return undefined;
+}
+
+// function map_tree(f, Tree) {
+//     return map(elem => is_list(elem)
+//                       ? map_tree(f, elem)
+//                       : f(elem),
+//               Tree);
+// }
+
+function map_tree(f, tree) {
+    return is_null(tree)
+           ? null
+           : !is_pair(tree)
+           ? f(tree)
+           : pair(map_tree(f, head(tree)), 
+                  map_tree(f, tail(tree)));
+} 
+
+const btreeA = list(2, list(5, null, null), list(3, null, null));
+// display_list(map_tree(x => x, btreeA)); // map_tree WORKS
+display_list(bin_tree_to_BST(btreeA));
 // studio/ reflection function 
 // debug notes 
 // predeclared 
