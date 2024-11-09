@@ -665,6 +665,59 @@ function map_tree(f, tree) {
 const btreeA = list(2, list(5, null, null), list(3, null, null));
 // display_list(map_tree(x => x, btreeA)); // map_tree WORKS
 display_list(bin_tree_to_BST(btreeA));
+
+// zip_streams 
+function zips(strs){
+    return is_null(strs)
+           ? null 
+           : pair(head(head(strs)), () => zip(append(tail(strs))), 
+                                        list(stream_tail(head(strs))));
+}
+// stream_sum 
+function ps(s){
+    return is_null(s)
+           ? null 
+           :pair(head(s), () => add_streams(ps(s), stream_tail(s)));
+}
+// s9 count_pairs
+function count_pairs(x) {
+    let counted_pairs = null;
+
+    function check(y) {
+        if (is_pair(y) && is_null(member(y, counted_pairs))) {
+            counted_pairs = pair(y, counted_pairs);
+            check(head(y));
+            check(tail(y));
+        }
+    }
+
+    check(x);
+    return length(counted_pairs); 
+}
+ //s10 bubblelist
+ function bubblesort_list(L) {
+    const len = length(L);
+
+    for (let i = len - 1; i >= 1; i = i - 1) {
+        let p = L;
+
+        for (let j = 0; j < i; j = j + 1) {
+             if (head(p) > head(tail(p))) {
+                 const temp = head(p);
+                 set_head(p, head(tail(p)));
+                 set_head(tail(p), temp);
+        	    }
+        	   p = tail(p);
+         }
+     }
+}
+// mul_stream
+function mul_stream(a, b) {
+    return pair(head(a) * head(b),
+                          () => mul_streams(stream_tail(a), stream_tail(b)));
+}
+const B = pair(1, () => mul_stream(B, integers));
+
 // studio/ reflection function 
 // debug notes 
 // predeclared 
