@@ -31,7 +31,7 @@
 //      const distance = accumulate((x, y) => route_distance(mat, x) < y 
 //                                  ? route_distance(mat, x)
 //                                  : y, 10000, routine);
-//     const initial = append(head(routine), head(routine)); // how to get easier one
+//     const initial = append(head(routine), head(routine)); // just use head of rountine, but <= anyway
 //      const r1 = accumulate((x, y) => route_distance(mat, x) < route_distance(mat, y)
 //                                  ? x
 //                                  : y,initial, routine);
@@ -565,9 +565,19 @@ function string_list(s){
 }
 
 string_list("idoknowhowtodo");
+
+// instead of using accumulate,convert list to array and update the max/ min value
+// the element of the array is still the list 
+let top_most = - Infinity;
+for(let i = 0; i < array_length(ra); i = i + 1 ){
+    const rect = ra[i];
+    const top = get_y(rect);...... // abstract data 
+    
+    top_most = math_max(top, top_most) // keep updating the largest data
+    
+}
 // studio/ reflection function 
 // debug notes 
 // predeclared 
-// TA video 
 // online links 
 
